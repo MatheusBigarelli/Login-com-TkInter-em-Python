@@ -12,14 +12,16 @@ class Aplicativo:
         self.janelaPrincipal.mainloop()
 
     def efetuar_login(self, id, senha):
+        self.gerenciador_de_mensagens = GerenciadorDeMensagens()
+
+        # sqlite é base de dados local.
+        # não funciona em outro pc a não ser que seja inicializado um DB naquela máquina.
         try:
             self.conexaoSql = ConexaoSql()
             self.conexaoSql.conectar()
 
             if not self.conexaoSql.conexaoAberta:
                 raise ErroDeConexao("Não foi possível se conectar à base de dados.")
-
-            self.gerenciador_de_mensagens = GerenciadorDeMensagens()
 
             self.respostaDeQuery = self.conexaoSql.ler_banco_de_dados()
 
